@@ -109,11 +109,11 @@ The application follows the classic **Servlet + JSP + EJB Facade** pattern, laye
 
 ```mermaid
 flowchart TB
-    subgraph Client[Client / Browser]
-        BR[HTTP request<br/>GET/POST]
+    subgraph Client[Client - Browser]
+        BR[HTTP request - GET or POST]
     end
 
-    subgraph Controller[Controller Layer · controlador · Servlets]
+    subgraph Controller[Controller Layer - controlador - Servlets]
         AS[AlumnoServlet]
         DS[DocenteServlet]
         ES[ExamenServlet]
@@ -122,8 +122,8 @@ flowchart TB
         IS[InitServlet]
     end
 
-    subgraph Service[Service Layer · sesiones · @Stateless EJB Facades]
-        AF[AbstractFacade&lt;T&gt;]
+    subgraph Service[Service Layer - sesiones - Stateless EJB Facades]
+        AF[AbstractFacade of T]
         AF --> AlumnoFacade
         AF --> DocenteFacade
         AF --> MateriaFacade
@@ -132,7 +132,7 @@ flowchart TB
         AF --> CarreraFacade
     end
 
-    subgraph Model[Model Layer · entidad · JPA Entities]
+    subgraph Model[Model Layer - entidad - JPA Entities]
         AL[Alumno]
         DO[Docente]
         MA[Materia]
@@ -141,19 +141,19 @@ flowchart TB
         CA[Carrera]
     end
 
-    subgraph View[View Layer · WEB-INF/vista · JSP]
-        JSPs[JSP pages<br/>Listar* / Agregar* / Reporte*]
+    subgraph View[View Layer - WEB-INF vista - JSP]
+        JSPs[JSP pages - Listar - Agregar - Reporte]
     end
 
-    subgraph DB[MySQL 8 · bdalumnos]
+    subgraph DB[MySQL 8 - bdalumnos]
         T[(Tables + FKs)]
     end
 
     BR -->|HTTP| Controller
-    Controller -->|@EJB inject| Service
-    Service -->|JPA / EntityManager| Model
+    Controller -->|EJB inject| Service
+    Service -->|JPA EntityManager| Model
     Model -->|JDBC| DB
-    Controller -->|request.getRequestDispatcher| View
+    Controller -->|RequestDispatcher forward| View
     View -->|HTML response| BR
 ```
 
@@ -226,17 +226,6 @@ erDiagram
 | `alumno`               | `id`                                                 | `carrera_idcarrera` → `carrera(idcarrera)`                | Students enrolled in a career                          |
 | `examen`               | (`materia_idmateria`, `alumno_id`, `fecha`)          | `materia_idmateria` → `materia`, `alumno_id` → `alumno`  | Exam record: subject + student + timestamp + grade     |
 
-### Seed data shipped in `alumnosDB.sql`
-
-| Table                  | Rows inserted | Highlights                                                                                          |
-|------------------------|---------------|-----------------------------------------------------------------------------------------------------|
-| `facultad`             | 5              | Exactas, Ingeniería, Filosofía, Sociales, Arquitectura                                              |
-| `carrera`              | 1              | `TECNICATURA EN PROGRAMACION WEB` (facultad 1)                                                     |
-| `materia`              | 23             | From `Algoritmos y Resolución de Problemas` (114) up to `Programacion para móviles` (136)           |
-| `docente`              | 4              | Mariana Ceballos, Jorge Belgrano, Mariana Sanchez, Carlos Catalan — all `TITULAR`                  |
-| `docente_has_materia`  | 7              | Assignments of teachers to subjects 114, 115, 118, 120                                             |
-| `alumno`               | 2              | Catalan Carlos (reg. 21714), Mariano Godoy (reg. 27883) — both in career 9                          |
-| `examen`               | 1              | Subject 120, student 8, `2026-10-31 00:00:00`, grade 8                                              |
 
 ## Prerequisites
 
@@ -263,21 +252,15 @@ mysql -u root -p -e \
 
 The `utf8mb4` charset and `utf8mb4_0900_ai_ci` collation must match the dump shipped in `alumnosDB.sql`, otherwise the restore will fail on accentuated Spanish course names such as *Matemática* and *Inglés*.
 
-### Step 2 — Import the schema and seed data
+### Step 2 — Create the tables following the data model description
 
-From the directory that contains `alumnosDB.sql`:
-
-```bash
-mysql -u root -p bdalumnos < alumnosDB.sql
-```
-
-This creates all 7 tables, their foreign keys, and inserts the seed rows described above. Verify the restore with:
+After creation
 
 ```bash
 mysql -u root -p bdalumnos -e "SHOW TABLES; SELECT COUNT(*) AS alumnos FROM alumno;"
 ```
 
-Expected output: 7 tables and `alumnos = 2`.
+Expected output: 7 tables
 
 ### Step 3 — Create the JDBC connection pool and JNDI resource in GlassFish
 
@@ -324,7 +307,7 @@ mvn clean package
 The deployable artifact is generated at:
 
 ```
-target/Alumnos-1.0-SNAPSHOT.war
+target/Alumnos.war
 ```
 
 ### Step 5 — Deploy to GlassFish
@@ -332,13 +315,13 @@ target/Alumnos-1.0-SNAPSHOT.war
 Either from NetBeans (right-click project ▶ **Run**) or from the CLI:
 
 ```bash
-asadmin deploy target/Alumnos-1.0-SNAPSHOT.war
+asadmin deploy target/Alumnos.war
 ```
 
 To redeploy after a code change without losing the application context:
 
 ```bash
-asadmin redeploy --name Alumnos-1.0-SNAPSHOT target/Alumnos-1.0-SNAPSHOT.war
+asadmin redeploy --name Alumnos target/Alumnos.war
 ```
 
 ### Step 6 — Open the application
@@ -346,7 +329,7 @@ asadmin redeploy --name Alumnos-1.0-SNAPSHOT target/Alumnos-1.0-SNAPSHOT.war
 Point your browser to:
 
 ```
-http://localhost:8080/Alumnos-1.0-SNAPSHOT/
+http://localhost:8080/Alumnos/
 ```
 
 `InitServlet` will bootstrap any missing reference data on first load and then forward to `index.jsp`, which lists shortcuts to every management screen.
