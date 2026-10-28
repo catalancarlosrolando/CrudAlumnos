@@ -1,0 +1,59 @@
+/*
+ * pages/docente.css
+ * Estilos específicos de las páginas de Docente:
+ *   - AgregarDocente.jsp (form con checkboxes de materias, max-width 500px)
+ *   - ListarDocentes.jsp (tabla con modal y badge, max-width 950px)
+ * Autor: carlos
+ */
+
+/* ============================================================
+   FORMULARIO AGREGAR DOCENTE
+   ============================================================ */
+body.page-form-docente .container {
+    max-width: 500px;
+}
+
+body.page-form-docente h2 {
+    border-bottom: 2px solid #27ae60;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+
+body.page-form-docente .form-group {
+    margin-bottom: 15px;
+}
+
+body.page-form-docente .form-group input,
+body.page-form-docente .form-group select {
+    padding: 9px;
+}
+
+/* ============================================================
+   LISTADO DE DOCENTES
+   ============================================================ */
+body.page-list-docentes .container {
+    max-width: 950px;
+}
+
+body.page-list-docentes h1 {
+    font-size: 24px;
+}
+
+body.page-list-docentes .modal-content {
+    width: 450px;
+}
+
+/* Grupo de checkboxes dentro del modal */
+body.page-list-docentes .checkbox-group {
+    max-height: 120px;
+    overflow-y: auto;
+    border: 1px solid #ccd1d9;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+body.page-list-docentes .checkbox-group label {
+    font-weight: normal;
+    display: block;
+    margin-bottom: 4px;
+}

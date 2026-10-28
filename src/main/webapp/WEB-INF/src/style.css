@@ -1,0 +1,424 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : 19 oct 2026, 10:13:24
+    Author     : carlos
+*/
+
+/* Reset general y configuración base */
+        /* Reset general y configuración base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #fcfcfc;
+      font-family: 'Open Sans', sans-serif;
+      color: #333;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Contenedor principal centrado */
+    .page-wrapper {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 20px 0 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Logo superior (Llama estilizada roja) */
+    .brand-flame {
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .brand-flame svg {
+      width: 38px;
+      height: 48px;
+      filter: drop-shadow(0 2px 4px rgba(180, 40, 40, 0.2));
+    }
+
+    /* Títulos centrales */
+    .site-title {
+      text-align: center;
+      margin-bottom: 24px;
+      user-select: none;
+    }
+
+    .site-title .title-sistema {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: 5px;
+      color: #2779a7;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .site-title .title-alumnos {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 19px;
+      letter-spacing: 6px;
+      color: #0b8a7f;
+      text-transform: uppercase;
+      margin-top: 4px;
+      line-height: 1.2;
+    }
+
+    /* Barra de navegación */
+    .nav-container {
+      width: 100%;
+      max-width: 780px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 32px;
+      margin: 0 auto;
+      padding-left: 50px;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      font-family: 'Courier Prime', Courier, monospace;
+      font-size: 14.5px;
+      color: #202020;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      padding: 6px 4px;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: #e67e22;
+    }
+
+    /* Item Activo con barra superior naranja */
+    .nav-item.active::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      left: -8px;
+      right: -8px;
+      height: 3.5px;
+      background-color: #e88622;
+      border-radius: 2px;
+    }
+
+    /* Submenú desplegable estilo imagen */
+    .submenu {
+      list-style: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      padding-top: 10px;
+      display: none; /* Oculto por defecto */
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    /* Clase activa para mostrar el submenú */
+    .nav-item.open  {
+      display: flex;
+      opacity: 1;
+    }
+
+    .submenu-link {
+      text-decoration: none;
+      font-family: 'Courier Prime', Courier, monospace;
+      font-size: 14px;
+      color: #222;
+      font-weight: 600;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+
+    .submenu-link:hover {
+      color: #e67e22;
+    }
+
+    /* Redes sociales a la derecha */
+    .social-links {
+      display: flex;
+      gap: 14px;
+      position: absolute;
+      right: 40px;
+      top: 4px;
+    }
+
+    .social-links a {
+      color: #111;
+      font-size: 15px;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .social-links a:hover {
+      color: #1877f2;
+    }
+
+    /* Galería / Carrusel de banners */
+    .showcase-slider {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: center;
+      min-height: 290px;
+      position: relative;
+    }
+
+    /* Tarjetas */
+    .card-item {
+      height: 270px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background-color: #fff;
+    }
+
+    /* Flechas del carrusel */
+    .carousel-control {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 24px;
+      cursor: pointer;
+      text-decoration: none;
+      z-index: 5;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+      transition: all 0.2s ease;
+    }
+
+    .carousel-control:hover {
+      transform: translateY(-50%) scale(1.15);
+      color: #fff;
+    }
+
+    .carousel-control.left {
+      left: 30px;
+    }
+
+    .carousel-control.right {
+      right: 30px;
+    }
+
+    /* Tarjeta Izquierda (Botón Naranja Java con gradiente) */
+    .card-left {
+      background: radial-gradient(circle at 50% 50%, #ffffff 0%, #ebebeb 80%);
+      border-right: 1px solid #f0f0f0;
+    }
+
+    .badge-java {
+      width: 210px;
+      height: 200px;
+      background: linear-gradient(145deg, #f8bc5c 0%, #eea136 60%, #e5871f 100%);
+      border-radius: 42px;
+      box-shadow: 6px 10px 22px rgba(0, 0, 0, 0.16), inset -2px -2px 6px rgba(0, 0, 0, 0.1), inset 2px 2px 6px rgba(255, 255, 255, 0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Línea curvada divisoria en el icono naranja */
+    .badge-java::before {
+      content: "";
+      position: absolute;
+      top: -15px;
+      bottom: -15px;
+      left: 55px;
+      width: 14px;
+      background: transparent;
+      border-left: 3px solid rgba(255, 255, 255, 0.45);
+      border-right: 3px solid rgba(190, 95, 10, 0.28);
+      border-radius: 50%;
+      transform: skewX(-7deg);
+    }
+
+    .badge-content {
+      margin-left: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .badge-content svg {
+      width: 65px;
+      height: 70px;
+      fill: #ffffff;
+      filter: drop-shadow(0 2px 4px rgba(180, 80, 0, 0.25));
+    }
+
+    .badge-content .badge-text {
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      font-size: 26px;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      margin-top: 4px;
+      position: relative;
+    }
+
+    .badge-content .badge-text sup {
+      font-size: 10px;
+      font-weight: normal;
+      position: absolute;
+      top: 4px;
+      right: -13px;
+    }
+
+    /* Tarjeta Central (Bosquejo clásico taza Java) */
+    .card-center {
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .java-sketch-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .java-classic-title {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: #9d1326;
+      letter-spacing: 1px;
+      line-height: 1;
+      margin-top: 8px;
+      position: relative;
+    }
+
+    .java-classic-title sup {
+      font-size: 10px;
+      font-weight: 400;
+      position: absolute;
+      top: 5px;
+      right: -14px;
+      font-family: sans-serif;
+    }
+
+    /* Tarjeta Derecha (Java Web Services) */
+    .card-right {
+      background: radial-gradient(circle at 50% 40%, #ffffff 0%, #ebebeb 85%);
+      border-left: 1px solid #f0f0f0;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .ws-top {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .ws-top svg {
+      width: 58px;
+      height: 68px;
+    }
+
+    .ws-top .ws-java-text {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 38px;
+      font-weight: bold;
+      color: #e88622;
+      letter-spacing: -0.5px;
+    }
+
+    .ws-bottom-banner {
+      width: 100%;
+      height: 68px;
+      background: linear-gradient(180deg, #ec9c5b 0%, #d97834 100%);
+      border-top: 2.5px solid #dcdcdc;
+      border-radius: 40% 40% 0 0 / 14px 14px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 3px 5px rgba(255, 255, 255, 0.45);
+    }
+
+    .ws-bottom-banner span {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 21px;
+      color: #27475d;
+      letter-spacing: 1.5px;
+    }
+
+    /* Pie de página con marca de agua */
+    .page-footer {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      padding: 10px 24px 14px;
+    }
+
+    .watermark-text {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 11px;
+      color: #555;
+    }
+
+    /* Responsividad */
+    @media (max-width: 860px) {
+      .showcase-slider {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .nav-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .nav-menu {
+        padding-left: 0;
+      }
+      .social-links {
+        position: static;
+        margin-top: 14px;
+      }
+    }

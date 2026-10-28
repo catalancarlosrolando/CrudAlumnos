@@ -1,0 +1,29 @@
+# ── Maven build output ──
+target/
+build/
+
+# ── NetBeans personal/cache ──
+nbproject/private/
+nb-configuration.xml
+nbactions.xml
+catalog.xml
+build-impl.xml
+nbdist/
+
+# ── IDE generales ──
+.idea/
+*.iml
+.vscode/
+*.swp
+*~
+
+# ── OS ──
+.DS_Store
+Thumbs.db
+
+# ── GlassFish / logs locales ──
+*.log
+nbproject/build-impl.xml.bak
+
+# ── DB credentials si los llegás a commitear por error ──
+*.local.properties

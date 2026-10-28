@@ -1,0 +1,38 @@
+/*
+ * pages/materias.css
+ * Estilos específicos de ListarMaterias.jsp:
+ *   - Container max-width 800px
+ *   - Modal width 400px
+ *   - h3 del modal SIN borde inferior (override de components.css)
+ * Autor: carlos
+ */
+
+body.page-list-materias .container {
+    max-width: 800px;
+}
+
+body.page-list-materias h1 {
+    font-size: 24px;
+}
+
+/* ============================================================
+   MODAL (400px, sin borde inferior en h3)
+   ============================================================ */
+body.page-list-materias .modal-content {
+    width: 400px;
+}
+
+/* Override: el h3 del modal de materias no lleva borde inferior
+   (en components.css por defecto lleva border-bottom azul) */
+body.page-list-materias .modal-content h3 {
+    border-bottom: none;
+}
+
+/* El formulario de materias solo usa inputs (no selects) */
+body.page-list-materias .form-group input {
+    padding: 9px 10px;
+}
+
+body.page-list-materias .form-group input:focus {
+    border-color: #e67e22;
+}

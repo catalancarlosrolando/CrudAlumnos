@@ -1,0 +1,55 @@
+/*
+ * pages/alumno.css
+ * Estilos específicos de las páginas de Alumno:
+ *   - AgregaAlumno.jsp (form, max-width 550px)
+ *   - ListarAlumnos.jsp (tabla con modales, max-width 950px)
+ * Autor: carlos
+ */
+
+/* ============================================================
+   FORMULARIO AGREGAR ALUMNO
+   ============================================================ */
+body.page-form-alumno .container {
+    max-width: 550px;
+    padding: 30px;
+}
+
+body.page-form-alumno h1 {
+    margin-bottom: 25px;
+    font-size: 22px;
+    border-bottom: 2px solid #e67e22;
+    padding-bottom: 10px;
+}
+
+body.page-form-alumno .form-group {
+    margin-bottom: 20px;
+}
+
+body.page-form-alumno label {
+    display: block;
+    margin-bottom: 8px;
+    color: #34495e;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* ============================================================
+   LISTADO DE ALUMNOS
+   ============================================================ */
+body.page-list-alumnos .container {
+    max-width: 950px;
+}
+
+body.page-list-alumnos h1 {
+    font-size: 24px;
+}
+
+/* Modal de edición de alumno */
+body.page-list-alumnos .modal-content h3 {
+    border-bottom-color: #2980b9;
+}
+
+body.page-list-alumnos .form-group input:focus,
+body.page-list-alumnos .form-group select:focus {
+    border-color: #2980b9;
+}

@@ -1,0 +1,66 @@
+/*
+ * layout.css
+ * Estructura de página: page-wrapper, container, header-section, footer.
+ * Se carga en TODAS las páginas.
+ * Autor: carlos
+ */
+
+/* Contenedor principal centrado (envuelve header + navbar + contenido) */
+.page-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 20px 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* Contenedor de contenido (cards, formularios, tablas) */
+.container {
+    width: 100%;
+    max-width: 850px;            /* default; cada página puede sobreescribirlo */
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Cabecera interna de páginas con título + acción */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e67e22;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Sub-encabezado informativo bajo header-section */
+.info-header {
+    color: #7f8c8d;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+/* Pie de página (componente simple) */
+.page-footer {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 24px 14px;
+    background-color: #2c3e50;
+    color: #ffffff;
+}
+
+.page-footer .watermark-text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 11px;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+}

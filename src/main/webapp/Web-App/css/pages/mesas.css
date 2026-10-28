@@ -1,0 +1,91 @@
+/*
+ * pages/mesas.css
+ * Estilos específicos de ListarMesas.jsp:
+ *   - Formulario de filtrado por mes/año
+ *   - Tabla de mesas con nota destacada
+ *   - Modales emergentes
+ * Autor: carlos
+ */
+
+body.page-list-mesas .container {
+    max-width: 1000px;
+}
+
+body.page-list-mesas h1 {
+    font-size: 24px;
+}
+
+/* ============================================================
+   FORMULARIO DE FILTRADO
+   ============================================================ */
+.filter-form {
+    background-color: #ecf0f1;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.filter-form .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+}
+
+.filter-form label {
+    font-size: 13px;
+    font-weight: bold;
+    color: #34495e;
+    margin-bottom: 5px;
+}
+
+.filter-form select {
+    padding: 8px;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    font-size: 14px;
+    background: #ffffff;
+}
+
+/* ============================================================
+   MODAL-FORM (específico de mesas)
+   ============================================================ */
+.modal-form .form-group {
+    margin-bottom: 15px;
+}
+
+.modal-form label {
+    font-size: 13px;
+    font-weight: bold;
+    color: #34495e;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.modal-form input,
+.modal-form select {
+    width: 100%;
+    padding: 9px;
+    border: 1px solid #ccd1d9;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    background-color: #ffffff;
+}
+
+.modal-form input:focus,
+.modal-form select:focus {
+    border-color: #27ae60;
+}
+
+/* Modal de edición con cabecera azul */
+.modal-content.edit-header h3 {
+    border-bottom-color: #2980b9;
+}
+
+.modal-content.edit-header .modal-form input:focus,
+.modal-content.edit-header .modal-form select:focus {
+    border-color: #2980b9;
+}
